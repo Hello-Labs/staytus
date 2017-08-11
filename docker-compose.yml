@@ -1,0 +1,20 @@
+version: '3'
+services:
+  db:
+    image: "mysql:5.6"
+    environment:
+      - MYSQL_DATABASE=staytus
+      - MYSQL_USER=staytus
+      - MYSQL_PASSWORD=""
+      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+  web:
+    build: .
+    ports:
+     - "5000:5000"
+    volumes:
+     - .:/opt/staytus
+    environment:
+     - SECRET_KEY_BASE=GHGT44ed1b7767c44b457B189472f438fd4a061237e75e81685f975efcd5292e73bafd0109b528c5815b197614f60dbf1162e014d49d402203b3b20e00
+     - DB_HOST=staytus_db_1
+    depends_on:
+     - db
